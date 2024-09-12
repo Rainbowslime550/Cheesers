@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FNaF Room</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+        }
+
+        .room {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .camera {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: #000;
+            border: 5px solid #666;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .camera-top {
+            top: 20px;
+            left: 20px;
+        }
+
+        .camera-bottom {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .camera img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 24px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="room">
+        <div class="camera camera-top">
+            <img src="https://via.placeholder.com/300x200.png?text=Camera+View+1" alt="Camera View 1">
+        </div>
