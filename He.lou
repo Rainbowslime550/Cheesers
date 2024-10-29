@@ -1,4 +1,4 @@
-local Rayfield = loadstring(game:HttpGet('https://[Log in to view URL]'))()
+local Rayfield = loadstring(game:HttpGet('https://[https://raw.githubusercontent.com/Rainbowslime550/Cheesers/refs/heads/main/He.lou]'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "Universal Script",
