@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url('https://windows11.now.sh/static/media/default-background.e4449f44.jpg');
+            background-size: cover;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #taskbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #start-button {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://windows11.now.sh/static/media/windows.png');
+            background-size: contain;
+            cursor: pointer;
+        }
+        #clock {
+            position: absolute;
+            right: 20px;
+            color: #000;
+        }
+        #desktop-icons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .icon img {
+            width: 48px;
+            height: 48px;
+        }
+        .icon span {
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="desktop-icons">
+        <div class="icon">
+            <img src="https://windows11.now.sh/static/media/recyclebin-full.png" alt="Recycle Bin">
+            <span>Recycle Bin</span>
+        </div>
+        <div class="icon">
+            <img src="https://windows11.now.sh/static/media/edge.png" alt="Microsoft Edge">
+            <span>Microsoft Edge</span>
+        </div>
+    </div>
+    <div id="taskbar">
+        <div id="start-button"></div>
+        <div id="clock"></div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            document.getElementById('clock').textContent = time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
+
+This HTML code creates a basic simulation of a Windows 11 desktop environment. It includes:
+
+A background image reminiscent of Windows 11
+A taskbar at the bottom with a Start button and a working clock
+Two desktop icons (Recycle Bin and Microsoft Edge)
+
+The code uses CSS for styling and a small JavaScript function to update the clock in real-time. You can further enhance this simulation by adding more interactivity, such as a working Start menu or clickable icons that open simulated applications.
