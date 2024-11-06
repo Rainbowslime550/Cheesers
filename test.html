@@ -3,94 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows 11 Simulation</title>
+    <title>Password Protected Redirector</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-image: url('https://windows11.now.sh/static/media/default-background.e4449f44.jpg');
-            background-size: cover;
-            height: 100vh;
-            overflow: hidden;
-        }
-        #taskbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 48px;
-            background-color: rgba(255, 255, 255, 0.8);
+            font-family: Arial, sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
-        }
-        #start-button {
-            width: 40px;
-            height: 40px;
-            background-image: url('https://windows11.now.sh/static/media/windows.png');
-            background-size: contain;
-            cursor: pointer;
-        }
-        #clock {
-            position: absolute;
-            right: 20px;
-            color: #000;
-        }
-        #desktop-icons {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 20px;
-        }
-        .icon {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
-            cursor: pointer;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        .icon img {
-            width: 48px;
-            height: 48px;
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .icon span {
-            color: #fff;
-            text-shadow: 1px 1px 2px #000;
-            margin-top: 5px;
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 5px;
         }
     </style>
 </head>
 <body>
-    <div id="desktop-icons">
-        <div class="icon">
-            <img src="https://windows11.now.sh/static/media/recyclebin-full.png" alt="Recycle Bin">
-            <span>Recycle Bin</span>
-        </div>
-        <div class="icon">
-            <img src="https://windows11.now.sh/static/media/edge.png" alt="Microsoft Edge">
-            <span>Microsoft Edge</span>
-        </div>
+    <div class="container">
+        <h1>Password Protected Redirector</h1>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <input type="url" id="urlInput" placeholder="Enter URL to redirect to">
+        <button onclick="checkPasswordAndRedirect()">Go</button>
     </div>
-    <div id="taskbar">
-        <div id="start-button"></div>
-        <div id="clock"></div>
-    </div>
+
     <script>
-        function updateClock() {
-            const now = new Date();
-            const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            document.getElementById('clock').textContent = time;
+        function checkPasswordAndRedirect() {
+            const password = document.getElementById('passwordInput').value;
+            const url = document.getElementById('urlInput').value;
+
+            if (password === '22333') {
+                if (url) {
+                    window.location.href = url;
+                } else {
+                    alert('Please enter a valid URL');
+                }
+            } else {
+                alert('Incorrect password');
+            }
         }
-        setInterval(updateClock, 1000);
-        updateClock();
     </script>
 </body>
 </html>
 
-This HTML code creates a basic simulation of a Windows 11 desktop environment. It includes:
-
-A background image reminiscent of Windows 11
-A taskbar at the bottom with a Start button and a working clock
-Two desktop icons (Recycle Bin and Microsoft Edge)
-
-The code uses CSS for styling and a small JavaScript function to update the clock in real-time. You can further enhance this simulation by adding more interactivity, such as a working Start menu or clickable icons that open simulated applications.
+This HTML code creates a simple password-protected website redirector. The password is set to "22333" as requested. Users need to enter this password and the URL they want to redirect to. If the password is correct and a valid URL is provided, the page will redirect to the specified URL. If the password is incorrect or no URL is provided, an alert will be shown.
