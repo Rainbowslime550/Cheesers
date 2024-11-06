@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #clickButton {
+            font-size: 24px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #devConsole {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clicker Game</h1>
+    <p>Clicks: <span id="clickCount">0</span></p>
+    <button id="clickButton">Click Me!</button>
+
+    <div id="devConsole">
+        <h2>Dev Console</h2>
+        <input type="number" id="setClicks" placeholder="Set clicks">
+        <button onclick="setClickCount()">Set</button>
+    </div>
+
+    <script>
+        let clicks = 0;
+        const clickButton = document.getElementById('clickButton');
+        const clickCountDisplay = document.getElementById('clickCount');
+        const devConsole = document.getElementById('devConsole');
+
+        clickButton.addEventListener('click', () => {
+            clicks++;
+            updateClickDisplay();
+        });
+
+        function updateClickDisplay() {
+            clickCountDisplay.textContent = clicks;
+        }
+
+        function setClickCount() {
+            const newClicks = parseInt(document.getElementById('setClicks').value);
+            if (!isNaN(newClicks)) {
+                clicks = newClicks;
+                updateClickDisplay();
+            }
+        }
+
+        // Dev console password lock
+        const devPassword = 'secret123';
+        document.addEventListener('keydown', (event) => {
+            if (event.ctrlKey && event.shiftKey && event.key === 'D') {
+                const password = prompt('Enter dev console password:');
+                if (password === devPassword) {
+                    devConsole.style.display = 'block';
+                } else {
+                    alert('Incorrect password');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
