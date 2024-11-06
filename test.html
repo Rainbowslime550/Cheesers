@@ -3,56 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Protected Redirector</title>
+    <title>Flappy Bird</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input, button {
+        canvas {
+            border: 1px solid black;
             display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 5px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Password Protected Redirector</h1>
-        <input type="password" id="passwordInput" placeholder="Enter password">
-        <input type="url" id="urlInput" placeholder="Enter URL to redirect to">
-        <button onclick="checkPasswordAndRedirect()">Go</button>
-    </div>
-
+    <canvas id="gameCanvas" width="320" height="480"></canvas>
     <script>
-        function checkPasswordAndRedirect() {
-            const password = document.getElementById('passwordInput').value;
-            const url = document.getElementById('urlInput').value;
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
 
-            if (password === '22333') {
-                if (url) {
-                    window.location.href = url;
-                } else {
-                    alert('Please enter a valid URL');
-                }
-            } else {
-                alert('Incorrect password');
-            }
+        // Bird
+        let birdY = canvas.height / 2;
+        let birdVelocity = 0;
+        const gravity = 0.5;
+        const jumpStrength = -10;
+
+        // Pipe
+        let pipeX = canvas.width;
+        const pipeWidth = 50;
+        const pipeGap = 150;
+        let topPipeHeight = Math.random() * (canvas.height - pipeGap);
+
+        function drawBird() {
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(50, birdY, 30, 30);
         }
+
+        function drawPipes() {
+            ctx.fillStyle = 'green';
+            ctx.fillRect(pipeX, 0, pipeWidth, topPipeHeight);
+            ctx.fillRect(pipeX, topPipeHeight + pipeGap, pipeWidth, canvas.height);
+        }
+
+        function update() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update bird position
+            birdVelocity += gravity;
+            birdY += birdVelocity;
+
+            // Update pipe position
+            pipeX -= 2;
+            if (pipeX < -pipeWidth) {
+                pipeX = canvas.width;
+                topPipeHeight = Math.random() * (canvas.height - pipeGap);
+            }
+
+            // Draw game objects
+            drawBird();
+            drawPipes();
+
+            // Game over condition
+            if (birdY > canvas.height || birdY < 0 || 
+                (pipeX < 80 && pipeX + pipeWidth > 50 && 
+                (birdY < topPipeHeight || birdY + 30 > topPipeHeight + pipeGap))) {
+                alert('Game Over!');
+                birdY = canvas.height / 2;
+                birdVelocity = 0;
+                pipeX = canvas.width;
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Jump on click or spacebar
+        document.addEventListener('click', () => birdVelocity = jumpStrength);
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') birdVelocity = jumpStrength;
+        });
+
+        update();
     </script>
 </body>
 </html>
 
-This HTML code creates a simple password-protected website redirector. The password is set to "22333" as requested. Users need to enter this password and the URL they want to redirect to. If the password is correct and a valid URL is provided, the page will redirect to the specified URL. If the password is incorrect or no URL is provided, an alert will be shown.
+This code creates a simple Flappy Bird-style game using HTML5 canvas and JavaScript. The game features a bird that the player can make jump by clicking or pressing the spacebar. The bird must navigate through pipes that move from right to left. If the bird hits a pipe or goes off the screen, the game ends.
+
+To use this code, simply copy and paste it into an HTML file and open it in a web browser. You can further customize the game by adjusting variables like gravity, jump strength, or pipe speed to change the difficulty.
